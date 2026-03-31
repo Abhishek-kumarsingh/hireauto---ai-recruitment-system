@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "Candidate": {
+      "title": "Candidate",
+      "description": "A job applicant",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "experience": { "type": "number" },
+        "skills": { "type": "array", "items": { "type": "string" } },
+        "projects": { "type": "number" },
+        "resumeUrl": { "type": "string" },
+        "score": { "type": "number" },
+        "status": { "type": "string", "enum": ["Cold", "Warm", "Hot"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastMessageAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "createdAt"]
+    },
+    "Job": {
+      "title": "Job",
+      "description": "A job posting",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "requiredSkills": { "type": "array", "items": { "type": "string" } },
+        "minExperience": { "type": "number" }
+      },
+      "required": ["title"]
+    },
+    "Application": {
+      "title": "Application",
+      "description": "A candidate's application for a job",
+      "type": "object",
+      "properties": {
+        "candidateId": { "type": "string" },
+        "jobId": { "type": "string" },
+        "score": { "type": "number" },
+        "status": { "type": "string" },
+        "answers": { "type": "object" }
+      },
+      "required": ["candidateId", "jobId"]
+    }
+  },
+  "firestore": {
+    "candidates": {
+      "schema": "Candidate",
+      "description": "Collection of candidates"
+    },
+    "jobs": {
+      "schema": "Job",
+      "description": "Collection of job postings"
+    },
+    "applications": {
+      "schema": "Application",
+      "description": "Collection of applications"
+    }
+  }
+}
